@@ -23,17 +23,27 @@ class doubanspider:
         return data
 
     def save_content(self, data):
+        """
+        a 代表追加
+        w 代表写
+        r 代表读取文件
+        wb 代表以二进制写入文件
+        :param data:
+        :return:
+        """
         with open("douban.txt", "a",encoding="utf-8") as f:
             for content in data:
-                # todo
+                # 把列表转化为字符串
                 f.write(json.dumps(content, ensure_ascii=False))
                 f.write("\n")
             print("保存成功")
 
     def run(self):
+        # 忽略警告
         urllib3.disable_warnings()
         num = 0
         while True:
+            # format
             url = self.temp_url.format(num)
             print(url)
             # 1.解析url
